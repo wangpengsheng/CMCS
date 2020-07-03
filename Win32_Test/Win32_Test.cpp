@@ -5,6 +5,7 @@
 #include "Win32_Test.h"
 #include "../Motion_Win32/MotionFactory.h"
 #include "../System_Win32/Config.h"
+#include <direct.h>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -20,6 +21,10 @@ int main()
 {
 	auto _motion =MOTION_FACTORY;
 	auto _config = SYSCCONFIG;
+
+	//test project dir
+
+
 	
 	return 0;
 }

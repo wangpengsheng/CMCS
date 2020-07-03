@@ -2,6 +2,8 @@
 #include "Config.h"
 #include <pugixml.hpp>
 #include "../public_include/common1.h"
+#include <direct.h>
+#include "../Utility/GeneralFunc.h"
 
 std::unique_ptr<CConfig> CConfig::m_pInstance = nullptr;
 std::mutex CConfig::m_pInstance_lock;
@@ -13,7 +15,10 @@ CConfig::CConfig()
 
 void CConfig::init()
 {
-	m_strConfigPath = CFGDIR("axisconfig2.xml");
+	//m_strConfigPath = CFGDIR("axisconfig2.xml");
+	string path( _getcwd(nullptr,0));
+	path.erase(path.find_last_of("\\")).append("\\public_config_XML\\");
+	m_strConfigPath = path.append("axisconfig.xml");
 	load_cards(m_strConfigPath.c_str());
 }
 
@@ -37,8 +42,8 @@ bool CConfig::load_cards(const char* xml_name)
 			AxisParam axis_param;
 			axis_param.axisIndex = node_child.attribute("index").as_int();
 			axis_param.motorType = node_child.attribute("motorType").as_int();
-			axis_param.axisName = node_child.attribute("axisName").value();
-			axis_param.axisDes = node_child.attribute("axisDes").value();
+			axis_param.axisName = Utf8ToGbk(node_child.attribute("axisName").value());
+			axis_param.axisDes = Utf8ToGbk(node_child.attribute("axisDes").value());
 
 			axis_param.vel = node_child.attribute("vel").as_double();
 			axis_param.acc = node_child.attribute("acc").as_double();

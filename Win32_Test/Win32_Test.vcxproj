@@ -173,6 +173,9 @@
     <ProjectReference Include="..\System_Win32\System_Win32.vcxproj">
       <Project>{1d173717-2a6a-465b-9d36-ce5f644f9446}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{7a68be61-364b-47a4-9bad-973ecb1cccb6}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

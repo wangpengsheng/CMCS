@@ -16,6 +16,9 @@
     <Filter Include="BASE">
       <UniqueIdentifier>{ac7d08ca-7d55-4306-a305-be3c723c932e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="public_config_XML">
+      <UniqueIdentifier>{dea5463d-7fbe-4dce-a25c-e2b59ebf524f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -44,5 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\public_config_XML\axisconfig.xml">
+      <Filter>public_config_XML</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
