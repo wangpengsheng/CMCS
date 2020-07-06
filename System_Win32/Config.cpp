@@ -77,6 +77,7 @@ bool CConfig::load_cards(const char* xml_name)
 		}
 		card_info.bInit = false;
 		m_vecCardInfo.push_back(card_info);
+		m_CardsMap.insert(std::pair<string,CardInfo>(card_info.cardName,card_info));
 	}
 	return true;
 }
@@ -97,12 +98,14 @@ CConfig& CConfig::get_instance()
 
 void CConfig::destory_instance()
 {
-	if (m_pInstance != nullptr)
-	{
-		m_pInstance = nullptr;
-	}
+	
 }
 
 CConfig::~CConfig()
 {
+	if (m_pInstance != nullptr)
+	{
+		m_pInstance = nullptr;
+	}
+	cout << "CConfig uninstall ..." << endl;
 }

@@ -1,5 +1,4 @@
 #pragma once
-//#include "Motion_common.h"
 #include <mutex>
 
 #define MOTION_FACTORY CMotionFactory::get_instance()

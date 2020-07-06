@@ -22,9 +22,7 @@ int main()
 	auto _motion =MOTION_FACTORY;
 	auto _config = SYSCCONFIG;
 
-	//test project dir
 
-
-	
+	//_getchar_nolock();
 	return 0;
 }

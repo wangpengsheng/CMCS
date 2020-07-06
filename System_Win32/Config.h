@@ -12,6 +12,7 @@ public:
 	static CConfig& get_instance();
 	static void destory_instance();
 	virtual ~CConfig();
+	
 private:
 
 	void init();
@@ -22,8 +23,9 @@ private:
 	static std::mutex m_rwMutex;
 	std::string m_strConfigPath;
 
-	std::vector<CardInfo>	m_vecCardInfo;
 
+	std::vector<CardInfo>	m_vecCardInfo;
+	std::map<string,CardInfo> m_CardsMap;
 	CConfig();
 };
 

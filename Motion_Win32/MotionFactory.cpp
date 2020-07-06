@@ -31,8 +31,6 @@ CMotionFactory::~CMotionFactory()
 bool CMotionFactory::LoadCardInfo()
 {
 
-
-
 	return true;
 }
 

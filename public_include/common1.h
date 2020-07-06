@@ -236,40 +236,44 @@ typedef struct _StationPoint
 }StationPoint;
 
 //IO参数
-typedef struct _IOInfo
-{
-	string name;
-	int		cardType;		//0=运动控制卡本身，1=IOC0640,3=Can总线
-	int		cardIndex;		//卡号
-	int		cardNode;		//Can节点，运动控制卡下面的节点号
-	int		ioIndex;		//io索引
-	int		sense;			//1=高电平有效，0-低电平有效
-	int		group;			//分组
+//typedef struct _IOInfo
+//{
+//	string name;
+//	int		cardType;		//0=运动控制卡本身，1=IOC0640,3=Can总线
+//	int		cardIndex;		//卡号
+//	int		cardNode;		//Can节点，运动控制卡下面的节点号
+//	int		ioIndex;		//io索引
+//	int		sense;			//1=高电平有效，0-低电平有效
+//	int		group;			//分组
+//
+//	_IOInfo()
+//	{
+//		name = "";
+//		cardType = 0;
+//		cardIndex = 0;
+//		cardNode = 0;
+//		ioIndex = 0;
+//		sense = 1;
+//		group = 0;
+//	}
+//
+//	_IOInfo& operator=(const _IOInfo& other)
+//	{
+//		name = other.name;
+//		cardType = other.cardType;
+//		cardIndex = other.cardIndex;
+//		cardNode = other.cardNode;
+//		ioIndex = other.ioIndex;
+//		sense = other.sense;
+//		group = other.group;
+//		return *this;
+//	}
+//
+//}IOInfo, *IOInfoPtr;
 
-	_IOInfo()
-	{
-		name = "";
-		cardType = 0;
-		cardIndex = 0;
-		cardNode = 0;
-		ioIndex = 0;
-		sense = 1;
-		group = 0;
-	}
 
-	_IOInfo& operator=(const _IOInfo& other)
-	{
-		name = other.name;
-		cardType = other.cardType;
-		cardIndex = other.cardIndex;
-		cardNode = other.cardNode;
-		ioIndex = other.ioIndex;
-		sense = other.sense;
-		group = other.group;
-		return *this;
-	}
 
-}IOInfo, *IOInfoPtr;
+
 
 //轴参数
 typedef struct _AxisParam
@@ -436,6 +440,26 @@ typedef struct _CardInfo
 	}
 
 }CardInfo, *CardInfoPtr;
+
+enum CardType
+{
+	MOTION,
+	IO,
+	CAN_IO,
+	RS232,
+	NONE
+};
+
+
+typedef struct newCardInfo
+{
+	CardType card_type;
+	std::string card_name;
+	int card_id;
+	int card_port;
+	string card_version;
+}NewCardInfo;
+
 
 struct VisionPara
 {
