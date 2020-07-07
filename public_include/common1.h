@@ -21,7 +21,6 @@ using namespace std;
 #define SAME_PULSE_OFFSET	5		//差距多少个脉冲认为位置没有变化
 #define MAX_AXISCNT			8
 
-
 //以下自由配置信号是否取反
 #define DMC_CFG			"dmc_cfg"
 #define POSITIVE_SENCE	"positive_sence"        //正限位
@@ -34,7 +33,6 @@ using namespace std;
 #define CLEAR_SENCE		"clear_sence"           //清除报警
 #define GPO_SENCE		"gpo_sence"             //通用输出
 #define GPOEXT_SENCE	"gpoext_sence"          //扩展卡通用输出
-
 
 //错误代码
 enum EM_ERR_CODE
@@ -167,113 +165,41 @@ typedef struct _TSpeed
 	double dec;
 } TSpeed;
 
-/*******************************插补***************************************/
-
-struct TMovept
-{//插补参数
-	int     dir;			//1 顺时针方向 -1 逆时针方向 0直线插补
-	long    pos[6];			//1轴位置 圆弧插补终点X
-	//long    pos2;			//2轴位置 圆弧插补中点Y
-	//long    pos3;			//3轴位置 圆弧插补圆心X
-	//long    pos4;			//4轴位置 圆弧插补圆心Y
-	//long    pos5;			//5轴位置 圆弧插补 轴1索引
-	//long    pos6;			//6轴位置 圆弧插补 轴2索引
-	double  vel;			//速度
-	double  acc;			//加减速度
-};
-
-
-//struct TCool
-//{//坐标系数据
-//	Semaphore				samStop;				//停止信号量
-//	Semaphore				samExit;				//退出信号量
-//	//QFuture<int>			threadHandle;			//
-//	std::future<int>		threadHandle;
-//	unsigned short			cardID;					//卡号
-//	unsigned short			crdID;					//坐标系id
-//	unsigned short			bLock;					//是否已经锁定坐标系
-//	unsigned short			axisCnt;				//轴数量
-//	unsigned short			axis[CRD_AXIS_CNT];		//轴索引数组
-//	unsigned short			isMoving;				//是否在运动中，1运动中 0不在运动中
-//	unsigned short			curMoveIndex;			//当前已完成插补段
-//	std::vector<TMovept*>	vecpt;					//插补段缓冲区
-//};
-
-struct Coord
+//IO参数
+typedef struct _IOInfo
 {
-	unsigned short  cardIndex;      //卡索引
-	unsigned short  index;          //坐标系[0,1]
-};
+	string name;
+	int		cardType;		//0=运动控制卡本身，1=IOC0640,3=Can总线
+	int		cardIndex;		//卡号
+	int		cardNode;		//Can节点，运动控制卡下面的节点号
+	int		ioIndex;		//io索引
+	int		sense;			//1=高电平有效，0-低电平有效
+	int		group;			//分组
 
-typedef struct _AxisPos
-{
-	std::string	axisName;
-	double	axisPos;
-	_AxisPos& operator=(const _AxisPos & other)
+	_IOInfo()
 	{
-		axisName = other.axisName;
-		axisPos = other.axisPos;
+		name = "";
+		cardType = 0;
+		cardIndex = 0;
+		cardNode = 0;
+		ioIndex = 0;
+		sense = 1;
+		group = 0;
+	}
+
+	_IOInfo& operator=(const _IOInfo& other)
+	{
+		name = other.name;
+		cardType = other.cardType;
+		cardIndex = other.cardIndex;
+		cardNode = other.cardNode;
+		ioIndex = other.ioIndex;
+		sense = other.sense;
+		group = other.group;
 		return *this;
 	}
-}AxisPos;
 
-typedef struct _StationPoint
-{
-	string		name;
-	string		desc;
-	double		X;
-	double		Y;
-	double		Z;
-	double		U;
-	double		V;
-
-	_StationPoint()
-		:name(""), desc(""), X(0.0), Y(0.0), Z(0.0), U(0.0), V(0.0)
-	{
-
-	}
-
-}StationPoint;
-
-//IO参数
-//typedef struct _IOInfo
-//{
-//	string name;
-//	int		cardType;		//0=运动控制卡本身，1=IOC0640,3=Can总线
-//	int		cardIndex;		//卡号
-//	int		cardNode;		//Can节点，运动控制卡下面的节点号
-//	int		ioIndex;		//io索引
-//	int		sense;			//1=高电平有效，0-低电平有效
-//	int		group;			//分组
-//
-//	_IOInfo()
-//	{
-//		name = "";
-//		cardType = 0;
-//		cardIndex = 0;
-//		cardNode = 0;
-//		ioIndex = 0;
-//		sense = 1;
-//		group = 0;
-//	}
-//
-//	_IOInfo& operator=(const _IOInfo& other)
-//	{
-//		name = other.name;
-//		cardType = other.cardType;
-//		cardIndex = other.cardIndex;
-//		cardNode = other.cardNode;
-//		ioIndex = other.ioIndex;
-//		sense = other.sense;
-//		group = other.group;
-//		return *this;
-//	}
-//
-//}IOInfo, *IOInfoPtr;
-
-
-
-
+}IOInfo, *IOInfoPtr;
 
 //轴参数
 typedef struct _AxisParam
@@ -450,7 +376,6 @@ enum CardType
 	NONE
 };
 
-
 typedef struct newCardInfo
 {
 	CardType card_type;
@@ -459,7 +384,6 @@ typedef struct newCardInfo
 	int card_port;
 	string card_version;
 }NewCardInfo;
-
 
 struct VisionPara
 {
@@ -478,7 +402,6 @@ struct VisionPara
 	{
 	}
 };
-
 
 struct VisionConfig
 {

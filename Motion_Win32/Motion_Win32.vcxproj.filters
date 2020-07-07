@@ -30,7 +30,7 @@
     <ClInclude Include="MotionFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ICard.h">
+    <ClInclude Include="IOBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
